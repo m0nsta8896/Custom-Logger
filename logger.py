@@ -1,6 +1,7 @@
 import os
 import sys
 import datetime
+import threading
 from typing import Optional
 
 class Logging:
@@ -136,6 +137,7 @@ class Logger:
         self.log_to_console = log_to_console
         self.line_format = line_format
         self.file_encoding = file_encoding
+        self.lock = threading.Lock()
         
         self.log_file: Optional[open] = None
         self.current_log_path = None
@@ -167,27 +169,28 @@ class Logger:
             self.write(rollover_msg, is_internal=True)
     
     def write(self, message: str, is_internal: bool = False):
-        if is_internal:
+        with self.lock:
+            if is_internal:
+                if self.log_to_console:
+                    self.terminal.write(message)
+                if self.log_file and self.log_to_file:
+                    self.log_file.write(message)
+                return
+            
+            if self.log_to_file:
+                self._rotate_log_if_needed()
+            
             if self.log_to_console:
                 self.terminal.write(message)
-            if self.log_file and self.log_to_file:
-                self.log_file.write(message)
-            return
-        
-        if self.log_to_file:
-            self._rotate_log_if_needed()
-        
-        if self.log_to_console:
-            self.terminal.write(message)
-        
-        if self.log_to_file and self.log_file:
-            self.buffer += message
-            while '\n' in self.buffer:
-                line, self.buffer = self.buffer.split('\n', 1)
-                if line.strip():
-                    timestamp = datetime.datetime.now(self.timezone).strftime(self.timestamp_format)
-                    formatted_line = self.line_format.format(timestamp=timestamp, message=line)
-                    self.log_file.write(f"{formatted_line}\n")
+            
+            if self.log_to_file and self.log_file:
+                self.buffer += message
+                while '\n' in self.buffer:
+                    line, self.buffer = self.buffer.split('\n', 1)
+                    if line.strip():
+                        timestamp = datetime.datetime.now(self.timezone).strftime(self.timestamp_format)
+                        formatted_line = self.line_format.format(timestamp=timestamp, message=line)
+                        self.log_file.write(f"{formatted_line}\n")
     
     def flush(self):
         self.terminal.flush()
@@ -205,4 +208,4 @@ class Logger:
             self.log_file.close()
             self.log_file = None
 
-__version__ = '1.5.0'
+__version__ = '1.5.1'
