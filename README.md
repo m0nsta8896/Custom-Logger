@@ -11,18 +11,20 @@ This single-file utility provides robust, automatic logging for any Python scrip
 The logging process requires three simple steps: Import, Initialize, and Setup/Shutdown.
 1. Import and Initialize
 Create an instance of the Logging class, passing your desired configuration:
+
 | Parameter | Type | Default | Description |
 |---|---|---|---|
-| timezone | datetime.timezone | (Required) | The timezone object (e.g., from pytz) to use for all timestamps and date calculations. |
-| logs_dir | str | "logs" | The name of the directory where log files will be saved. |
-| retention_days | int | 7 | Number of days to keep logs before they are automatically deleted on startup. |
-| log_format | str | "log_%d-%m-%Y.txt" | Filename format for the daily log files. |
-| timestamp_format | str | "%H:%M:%S" | The time format used inside the log file for each line. |
-| log_to_file | bool | True | A switch to enable or disable logging to a file. |
-| log_to_console | bool | True | A switch to enable or disable printing output to the console. |
-| line_format | str | "[{timestamp}] {message}" | A customizable f-string like format for log lines. It uses {timestamp} and {message} as placeholders. |
-| file_encoding | str | "utf-8" | Allows you to specify the file encoding for the log files. |
-| cleanup_on_startup | bool | True | A switch to control whether the log cleanup process runs when setup() is called. |
+| timezone | datetime.timezone | (Required) | The timezone object to use for all timestamps and date calculations. |
+| logs_dir | str | "logs" | Directory where log files will be stored. |
+| retention_days | int | 7 | Number of days to keep logs before they are automatically cleaned up on startup. |
+| log_format | str | "log_%d-%m-%Y.txt" | strftime format for the log filename (creates a new file per day). |
+| timestamp_format | str | "%H:%M:%S" | strftime format for the timestamp prefix on each logged line. |
+| line_format | str | [{timestamp}] {message} | A customizable format string for log lines, using {timestamp} and {message} placeholders. |
+| log_to_file | bool | True | If False, disables writing to file but keeps console capture enabled. |
+| log_to_console | bool | True | If False, disables printing output to the console (headless logging). |
+| file_encoding | str | "utf-8" | File encoding for the log files. |
+| cleanup_on_startup | bool | True | If False, disables the log cleanup process when setup() is called. |
+
 ```python
 import pytz
 import traceback
