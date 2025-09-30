@@ -1,5 +1,5 @@
 # Custom Logger
-Version: 1.5.0
+Version: 1.5.1
 This single-file utility provides robust, automatic logging for any Python script. It captures all output from print() and sys.stderr (including uncaught exceptions and traceback details), redirects it to a timestamped, daily log file, and keeps the original console output intact. It is designed to be a "set-and-forget" logging solution, especially useful for long-running applications like bots.
 
 ## Key Features
