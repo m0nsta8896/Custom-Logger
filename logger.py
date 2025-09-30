@@ -70,14 +70,6 @@ class Logging:
         )
         sys.stdout = logger
         sys.stderr = logger
-        
-        print("\n" + "="*60)
-        print(f"Logging for {datetime.datetime.now(self.timezone).strftime('%A, %d %B %Y')} initiated.")
-        if self.log_to_file:
-            print(f"Output will be saved to files in: '{self.logs_dir}'")
-        if not self.log_to_console:
-            print("Console output is disabled.")
-        print("="*60 + "\n")
     
     def shutdown(self):
         """Restores the original stdout/stderr and closes the log file."""
@@ -86,8 +78,7 @@ class Logging:
             sys.stdout = logger_instance.terminal
             sys.stderr = logger_instance.terminal
             logger_instance.close()
-            print("Logging terminated. The log file has been closed.")
-    
+
     def cleanup_logs(self):
         """Deletes log files older than the retention period."""
         now = datetime.datetime.now(self.timezone)
@@ -165,7 +156,7 @@ class Logger:
             self.current_log_path = self._get_expected_log_path()
             self.log_file = open(self.current_log_path, "a", encoding=self.file_encoding)
             separator = "="*60
-            rollover_msg = f"\n{separator}\nLogging initiated for {datetime.datetime.now(self.timezone).strftime('%A, %d %B %Y')}\n{separator}\n"
+            rollover_msg = f"{separator}\nLogging initiated for {datetime.datetime.now(self.timezone).strftime('%A, %d %B %Y')}\n{separator}\n"
             self.write(rollover_msg, is_internal=True)
     
     def write(self, message: str, is_internal: bool = False):
@@ -179,7 +170,6 @@ class Logger:
             
             if self.log_to_file:
                 self._rotate_log_if_needed()
-            
             if self.log_to_console:
                 self.terminal.write(message)
             
