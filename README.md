@@ -1,13 +1,13 @@
 # Custom Logger
 Version: 1.5.2
-This single-file utility provides robust, automatic logging for any Python script. It captures all output from print() and sys.stderr (including uncaught exceptions and traceback details), redirects it to a timestamped, daily log file, and keeps the original console output intact. It is designed to be a "set-and-forget" logging solution, especially useful for long-running applications like bots.
+This single-file utility provides robust, automatic logging for any Python script. It captures all output from `print()` and `sys.stderr` (including uncaught exceptions and traceback details), redirects it to a timestamped, daily log file, and keeps the original console output intact. It is designed to be a "set-and-forget" logging solution, especially useful for long-running applications like bots.
 
 ## Key Features
  * Automatic Dual Output: Messages are simultaneously written to the console and a log file.
- * Daily Log Rotation: A new log file (log_DD-MM-YYYY.txt) is automatically created each day.
- * Timestamped Lines: Every logged line is prefixed with a [HH:MM:SS] timestamp.
- * Automatic Cleanup: On startup, the script automatically deletes log files older than the configured retention_days (default is 7).
- * Error Capture: Fully captures and logs all Python exceptions and tracebacks that would normally print to sys.stderr.
+ * Daily Log Rotation: A new log file (`log_DD-MM-YYYY.txt`) is automatically created each day.
+ * Timestamped Lines: Every logged line is prefixed with a `[HH:MM:SS]` timestamp.
+ * Automatic Cleanup: On startup, the script automatically deletes log files older than the configured retention_days (default is `7`).
+ * Error Capture: Fully captures and logs all Python exceptions and tracebacks that would normally print to `sys.stderr`.
 
 ## How to Use
 The logging process requires three simple steps: Import, Initialize, and Setup/Shutdown.
@@ -41,9 +41,9 @@ logging = Logging(
 ```
 
 2. Setup and Shutdown
-Wrap your main application logic between the setup() and shutdown() methods.
- * logging.setup(): Must be called once at the very start of your application.
- * logging.shutdown(): Must be called before the script exits (e.g., in a finally block or on a termination signal).
+Wrap your main application logic between the `setup()` and `shutdown()` methods.
+ * `logging.setup()`: Must be called once at the very start of your application.
+ * `logging.shutdown()`: Must be called before the script exits (e.g., in a finally block or on a termination signal).
 
 ```python
 def myapp():
