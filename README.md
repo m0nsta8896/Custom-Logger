@@ -1,5 +1,5 @@
 # Custom Logger
-Version: 1.5.1
+Version: 1.5.2
 This single-file utility provides robust, automatic logging for any Python script. It captures all output from print() and sys.stderr (including uncaught exceptions and traceback details), redirects it to a timestamped, daily log file, and keeps the original console output intact. It is designed to be a "set-and-forget" logging solution, especially useful for long-running applications like bots.
 
 ## Key Features
@@ -69,17 +69,16 @@ if __name__ == "__main__":
 ```
 
 ## Expected Output
-```
-============================================================
-Logging initiated for Saturday, 27 September 2025
-============================================================
-[20:40:30] Hello World!
-[20:40:30] Traceback (most recent call last):
-[20:40:30]   File "/storage/emulated/0/Projects/.Projects/CustomLogger/example.py", line 23, in <module>
-[20:40:30]     myapp()
-[20:40:30]   File "/storage/emulated/0/Projects/.Projects/CustomLogger/example.py", line 16, in myapp
-[20:40:30]     value = 1 / 0
-[20:40:30]             ~~^~~
-[20:40:30] ZeroDivisionError: division by zero
-[20:40:30] Shutting down logger...
+```python
+Logging initiated for Thursday, 02 October 2025
+––––––––––––––––––––––––––––––––––––––––––––––––––
+[09:26:49] Hello World!
+[09:26:49] Traceback (most recent call last):
+[09:26:49]   File "/storage/emulated/0/Projects/.Projects/CustomLogger/example.py", line 22, in <module>
+[09:26:49]     myapp()
+[09:26:49]   File "/storage/emulated/0/Projects/.Projects/CustomLogger/example.py", line 15, in myapp
+[09:26:49]     value = 1 / 0
+[09:26:49]             ~~^~~
+[09:26:49] ZeroDivisionError: division by zero
+[09:26:49] Shutting down logger...
 ```
