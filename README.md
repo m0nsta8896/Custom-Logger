@@ -74,9 +74,9 @@ Logging initiated for Thursday, 02 October 2025
 ––––––––––––––––––––––––––––––––––––––––––––––––––
 [09:26:49] Hello World!
 [09:26:49] Traceback (most recent call last):
-[09:26:49]   File "/storage/emulated/0/Projects/.Projects/CustomLogger/example.py", line 22, in <module>
+[09:26:49]   File "/Projects/.Projects/CustomLogger/example.py", line 22, in <module>
 [09:26:49]     myapp()
-[09:26:49]   File "/storage/emulated/0/Projects/.Projects/CustomLogger/example.py", line 15, in myapp
+[09:26:49]   File "/Projects/.Projects/CustomLogger/example.py", line 15, in myapp
 [09:26:49]     value = 1 / 0
 [09:26:49]             ~~^~~
 [09:26:49] ZeroDivisionError: division by zero
